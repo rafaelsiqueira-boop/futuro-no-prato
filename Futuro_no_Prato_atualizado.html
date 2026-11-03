@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Futuro no Prato — Um novo jeito de alimentar o mundo</title>
+<style>
+:root {
+  --site-primary: #C4A7FF;
+  --site-secondary: #34204F;
+  --site-background: #F5F6EF;
+  --site-on-primary: #14251D;
+  --site-on-secondary: #F7FAF3;
+  --site-on-background: #15231D;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); background: light-dark(#F5F6EF,#101713); color: light-dark(#15231D,#EAF1E9); }
+#app { min-height: 100vh; width: 100%; background-color: light-dark(var(--site-background), #101713); color: light-dark(var(--site-on-background),#EAF1E9); border-radius: 0; overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px); background: light-dark(rgb(245 246 239 / .88),rgb(16 23 19 / .88)); border-bottom: 1px solid light-dark(#dce3d7,#29352d); }
+.nav { height: 76px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:850; letter-spacing:-.04em; font-size:18px; }
+.brand-mark { width:34px;height:34px;border-radius:12px;background:var(--site-primary);display:grid;place-items:center;color:#34204F; }
+nav { display:flex; gap:27px; align-items:center; font-size:13px; font-weight:650; color:light-dark(#53665A,#B6C7B9); }
+nav a:hover { color:light-dark(#15231D,#fff); }
+.nav-cta,.btn { border:0; border-radius:999px; padding:13px 18px; font:700 13px var(--site-font-body); cursor:pointer; transition:transform .2s,background .2s; }
+.nav-cta,.btn-primary { background:var(--site-primary); color:#34204F; }
+.btn:hover,.nav-cta:hover { transform:translateY(-2px); }
+.hero { background: var(--site-secondary); color:var(--site-on-secondary); position:relative; overflow:hidden; }
+.hero:before,.hero:after { content:"";position:absolute;border:1px solid rgb(196 167 255 / .22);border-radius:50%;pointer-events:none;opacity:var(--site-decoration-opacity); }
+.hero:before { width:560px;height:560px;right:-120px;top:-230px; }
+.hero:after { width:400px;height:400px;right:-40px;top:-150px; }
+.hero-grid { display:grid; grid-template-columns:1.04fr .96fr; align-items:center; gap:40px; min-height:590px; padding:75px 0 82px; position:relative; z-index:1; }
+.eyebrow { display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--site-primary); }
+.dot { width:7px;height:7px;border-radius:50%;background:var(--site-primary);box-shadow:0 0 0 5px rgb(196 167 255 / .16); }
+h1,h2,h3,p { margin-top:0; }
+h1 { font-family:var(--site-font-heading);font-size:clamp(42px,6vw,76px);line-height:.99;letter-spacing:-.065em;margin:22px 0 22px;max-width:650px; }
+h1 em { color:var(--site-primary);font-style:normal; }
+.hero-copy { color:#C7D7CA; font-size:16px;line-height:1.75;max-width:520px;margin-bottom:28px; }
+.hero-actions { display:flex;gap:12px;flex-wrap:wrap; }
+.btn-secondary { color:#F7FAF3;background:rgb(255 255 255 / .08);border:1px solid rgb(255 255 255 / .2); }
+.hero-note { display:flex;align-items:center;gap:12px;margin-top:30px;color:#C7D7CA;font-size:12px; }
+.avatar-stack { display:flex; }
+.avatar-stack span { display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px solid var(--site-secondary);margin-left:-6px;background:#DDEAB9;color:#173D32;font-size:10px;font-weight:900; }
+.hero-art { position:relative; min-height:400px; display:grid;place-items:center; }
+.orbit { position:absolute;width:min(100%,430px);aspect-ratio:1;border:1px solid rgb(196 167 255 / .25);border-radius:50%; }
+.orbit.two { width:340px;transform:rotate(34deg) scaleY(.56);border-color:rgb(196 167 255 / .4); }
+.food-plate { width:280px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 35%,#f7f1d4 0 17%,#dbe7b0 18% 27%,#9cc56c 28% 31%,#f4edcf 32% 55%,#d5ddbd 56% 62%,#fff7dc 63% 67%,#8ba891 68% 70%,#234a3b 71%);box-shadow:0 35px 70px #06170f80, inset 0 0 20px #193b2c70;position:relative;z-index:2;transform:rotate(-12deg); }
+.food-plate:before { content:"";position:absolute;width:80px;height:105px;border-radius:70% 30% 65% 35%;background:linear-gradient(145deg,#b6e873,#397e48);left:48px;top:58px;transform:rotate(32deg);box-shadow:48px 47px 0 -9px #dc7b4e,83px -6px 0 -20px #f2c36a,-8px 92px 0 -16px #4e8c53; }
+.food-plate:after { content:"";position:absolute;width:65px;height:65px;border-radius:50%;background:#e8a45d;right:53px;top:66px;box-shadow:0 0 0 7px #f5d99a, -30px 87px 0 -15px #9a4e3a; }
+.float-card { position:absolute;z-index:4;background:rgb(247 250 243 / .95);color:#173D32;border-radius:16px;padding:14px 16px;box-shadow:0 14px 35px #06170f35;min-width:150px; }
+.float-card small { display:block;font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#64796b;font-weight:800;margin-bottom:5px; }
+.float-card strong { font-size:15px;letter-spacing:-.03em; }
+.float-card .mini { color:#5a8b3c;font-size:11px;margin-top:5px; }
+.card-one { top:47px;right:0; }.card-two { bottom:43px;left:0; }
+section { padding:92px 0; }
+.section-top { display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:36px; }
+.kicker { color:#8055B8;font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;margin-bottom:13px; }
+.section-top h2,.intro h2 { font-size:clamp(31px,4vw,49px);line-height:1.06;letter-spacing:-.055em;margin-bottom:0;max-width:620px; }
+.section-desc { max-width:390px;color:light-dark(#637168,#A6B6A8);font-size:14px;line-height:1.75;margin-bottom:3px; }
+.intro-grid { display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start; }
+.intro h2 { margin-bottom:22px; }
+.intro p { color:light-dark(#5f6e63,#A6B6A8);font-size:15px;line-height:1.85; }
+.stat-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px; }
+.stat { border:1px solid light-dark(#dce3d7,#2a392e);border-radius:18px;padding:19px 16px; }
+.stat strong { display:block;font-size:27px;letter-spacing:-.06em;color:light-dark(#244c35,#C7F28B);margin-bottom:5px; }
+.stat span { font-size:11px;color:light-dark(#68776b,#A6B6A8);line-height:1.4;display:block; }
+.cards { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+.innovation-intro { max-width:850px;margin:-12px 0 30px;color:light-dark(#5f6e63,#B7C8B9);font-size:15px;line-height:1.85; }
+.quote-panel { margin:0 0 30px;padding:24px 26px;border-radius:20px;background:light-dark(#173D32,#1b3025);color:#F7FAF3;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start; }
+.quote-mark { color:var(--site-primary);font-size:42px;line-height:1;font-weight:900; }
+.quote-panel blockquote { margin:0;font-size:clamp(17px,2vw,22px);line-height:1.55;font-weight:650;letter-spacing:-.025em; }
+.quote-panel cite { display:block;margin-top:10px;font-size:12px;font-style:normal;color:#C7D7CA; }
+.innovation-note { margin-top:22px;padding:18px 20px;border:1px solid light-dark(#dce3d7,#2a392e);border-radius:18px;color:light-dark(#5f6e63,#B7C8B9);font-size:12px;line-height:1.75; }
+.innovation-note strong { color:light-dark(#244c35,#C7F28B); }
+.food-card { border:1px solid light-dark(#dce3d7,#2a392e);border-radius:24px;overflow:hidden;background:light-dark(#FBFCF7,#17211A);transition:transform .25s,border-color .25s; }
+.food-card:hover { transform:translateY(-5px);border-color:#A78AE0; }
+.card-visual { height:205px;display:grid;place-items:center;position:relative;overflow:hidden;background:#E7EEDB; }
+.card-visual:before { content:"";position:absolute;width:185px;height:185px;border:1px solid rgb(23 61 50 / .14);border-radius:50%; }
+.visual-emoji { font-size:78px;filter:drop-shadow(0 15px 12px #173d3220);z-index:1; }
+.visual-lab { background:#E3E8F2; }.visual-green { background:#DDECD0; }.visual-gold { background:#F2E5C8; }
+.card-body { padding:24px; }
+.pill { display:inline-flex;border-radius:999px;padding:6px 9px;background:light-dark(#EEE6FA,#30243D);color:light-dark(#69449A,#D7C3FF);font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;margin-bottom:13px; }
+.card-body h3 { font-size:21px;letter-spacing:-.04em;margin-bottom:10px; }
+.card-body p { color:light-dark(#657267,#A6B6A8);font-size:13px;line-height:1.75;margin-bottom:18px; }
+.learn { padding:0;border:0;background:none;color:light-dark(#69449A,#D7C3FF);font:800 12px var(--site-font-body);cursor:pointer;display:flex;gap:8px;align-items:center; }
+.details { display:none;margin-top:15px;padding-top:15px;border-top:1px solid light-dark(#dce3d7,#2a392e);font-size:12px;line-height:1.7;color:light-dark(#526257,#C2D0C4); }
+.food-card.open .details { display:block; }
+.food-card.open .learn .arrow { transform:rotate(90deg); }
+.future-band { background:var(--site-secondary);color:#F7FAF3; }
+.future-grid { display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center; }
+.future-grid h2 { font-size:clamp(32px,4vw,50px);letter-spacing:-.06em;line-height:1.05;margin:18px 0; }
+.future-grid p { color:#C7D7CA;font-size:14px;line-height:1.8; }
+.future-steps { display:grid;gap:12px; }
+.step { display:grid;grid-template-columns:48px 1fr;gap:15px;padding:18px;border:1px solid rgb(255 255 255 / .13);border-radius:18px;background:rgb(255 255 255 / .04); }
+.step-num { width:42px;height:42px;border-radius:13px;background:var(--site-primary);color:#34204F;display:grid;place-items:center;font-weight:900; }
+.step h3 { font-size:15px;margin:2px 0 7px; }
+.step p { font-size:12px;line-height:1.65;margin:0;color:#B9CDBD; }
+.impact-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:14px; }
+.impact { border-radius:20px;padding:24px 20px;background:light-dark(#E9EEDC,#17211A); }
+.impact-icon { width:39px;height:39px;border-radius:13px;background:var(--site-primary);display:grid;place-items:center;color:#34204F;font-size:19px;margin-bottom:20px; }
+.impact h3 { font-size:16px;margin-bottom:9px;letter-spacing:-.03em; }
+.impact p { font-size:12px;line-height:1.7;color:light-dark(#657267,#A6B6A8);margin:0; }
+.quiz { background:light-dark(#E8EEDC,#17211A); }
+.quiz-box { display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center; }
+.quiz h2 { font-size:clamp(30px,4vw,46px);letter-spacing:-.06em;line-height:1.05;margin:16px 0; }
+.quiz-copy { color:light-dark(#637168,#A6B6A8);font-size:14px;line-height:1.8; }
+.quiz-panel { border-radius:24px;padding:28px;background:light-dark(#FBFCF7,#202D23);border:1px solid light-dark(#d7e0d1,#344438); }
+.quiz-panel h3 { font-size:17px;letter-spacing:-.03em;margin-bottom:18px; }
+.choice { display:flex;align-items:center;gap:12px;border:1px solid light-dark(#dce3d7,#354438);border-radius:14px;padding:14px;margin:9px 0;cursor:pointer;font-size:13px;transition:border .2s,background .2s; }
+.choice input { accent-color:#8055B8;width:16px;height:16px; }
+.choice:has(input:checked) { border-color:#A78AE0;background:light-dark(#F4EEFC,#30243D); }
+.quiz-submit { margin-top:12px;width:100%; }
+.quiz-result { display:none;margin-top:15px;padding:14px;border-radius:13px;background:light-dark(#EEE6FA,#30243D);color:light-dark(#56377D,#E1D3FF);font-size:13px;line-height:1.6; }
+footer { background:light-dark(#E5EADD,#0B100D);padding:30px 0;color:light-dark(#5b6b5f,#9eafa1);font-size:11px; }
+.footer-inner { display:flex;justify-content:space-between;gap:20px;align-items:center; }
+.footer-brand { color:light-dark(#173D32,#EAF1E9);font-weight:850;font-size:14px; }
+@media(max-width:850px) { nav {display:none}.hero-grid,.intro-grid,.future-grid,.quiz-box {grid-template-columns:1fr}.hero-grid{padding:60px 0;gap:20px}.hero-art{min-height:350px}.section-top{display:block}.section-desc{margin-top:18px}.cards{grid-template-columns:1fr 1fr}.impact-grid{grid-template-columns:1fr 1fr}.intro-grid,.future-grid,.quiz-box{gap:30px} }
+@media(max-width:560px) { .wrap{width:min(100% - 32px,1160px)}.nav{height:66px}.nav-cta{padding:11px 13px;font-size:11px}.hero-grid{min-height:0}.hero-art{min-height:310px}.food-plate{width:220px}.orbit{width:300px}.orbit.two{width:240px}.card-one{right:0;top:22px}.card-two{bottom:20px;left:0}.float-card{min-width:125px;padding:11px 12px}.float-card strong{font-size:12px}section{padding:65px 0}.cards{grid-template-columns:1fr}.card-visual{height:180px}.stat-grid{gap:8px}.stat{padding:14px 10px}.stat strong{font-size:23px}.impact-grid{grid-template-columns:1fr 1fr;gap:9px}.impact{padding:17px 14px}.footer-inner{align-items:flex-start;flex-direction:column}.quiz-panel{padding:20px} }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+/* Tema roxo e preto */
+:root { color-scheme: dark; --site-primary: #C4A7FF; --site-secondary: #170D24; --site-background: #08060B; --site-on-primary: #12091B; --site-on-secondary: #F7F0FF; --site-on-background: #F0E8FF; }
+body, #app { background: #08060B !important; color: #F0E8FF !important; }
+header { background: rgb(8 6 11 / .92); border-bottom-color: #342044; }
+nav { color: #C5B5D8; }
+nav a:hover { color: #FFFFFF; }
+.hero, .future-band { background: #170D24; color: #F7F0FF; }
+.hero-copy, .hero-note, .future-grid p { color: #D0C2E0; }
+.btn-secondary { color: #F7F0FF; background: rgb(196 167 255 / .08); border-color: rgb(196 167 255 / .28); }
+.food-card, .quiz-panel { background: #120D18; border-color: #342044; }
+.impact, .quiz { background: #100B15; }
+.stat, .innovation-note { border-color: #342044; }
+.stat strong, .innovation-note strong { color: #D5BEFF; }
+.section-desc, .intro p, .innovation-intro, .card-body p, .details, .quiz-copy, .impact p { color: #C2B5D1; }
+.kicker, .learn { color: #C4A7FF; }
+.pill { background: #30203F; color: #E0CEFF; }
+.choice { border-color: #3A284B; }
+.choice:has(input:checked) { border-color: #C4A7FF; background: #291A38; }
+.quiz-result { background: #291A38; color: #E5D5FF; }
+footer { background: #050408; color: #B6A7C8; }
+.footer-brand { color: #F0E8FF; }
+.details { font-size: 16px; line-height: 1.9; }
+.card-body p { font-size: 15px; line-height: 1.85; }
+.learn { font-size: 14px; }
+.history-section { padding: 76px 0; background: #0D0912; }
+.history-intro { max-width: 850px; color: #C2B5D1; font-size: 17px; line-height: 1.9; margin: 18px 0 30px; }
+.history-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.history-item { padding: 22px; border: 1px solid #342044; border-radius: 18px; background: #120D18; }
+.history-item strong { display: block; color: #D5BEFF; font-size: 18px; margin-bottom: 10px; }
+.history-item p { color: #C2B5D1; font-size: 15px; line-height: 1.85; margin: 0; }
+@media(max-width:850px) { .history-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="app" data-sites-preview-theme="custom">
+<header><div class="wrap nav">
+<a class="brand" href="#inicio"><span class="brand-mark">✳</span><span>Futuro no Prato</span></a>
+<nav aria-label="Navegação principal"><a href="#ideias">Novas tecnologias</a><a href="#como-funciona">Como funciona</a><a href="#impacto">Impacto</a><a href="#quiz">Explore</a></nav>
+<a class="nav-cta" href="#ideias">Descobrir o futuro ↗</a>
+</div></header>
+<main>
+<section class="hero" id="inicio"><div class="wrap hero-grid">
+<div><div class="eyebrow"><span class="dot"></span> O futuro está no prato</div>
+<h1>Comer bem.<br>Viver melhor.<br><em>Transformar o mundo.</em></h1>
+<p class="hero-copy">Como vamos produzir e consumir alimentos nas próximas décadas? Explore ideias que unem ciência, tecnologia e natureza para alimentar uma população crescente sem esquecer o planeta.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#ideias">Explorar inovações <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="#como-funciona">Entender as tecnologias</a></div>
+<div class="hero-note"><div class="avatar-stack"><span>🌱</span><span>🧬</span><span>♻</span></div><span>Ciência, sustentabilidade e novas possibilidades</span></div>
+</div>
+<div class="hero-art" aria-label="Ilustração artística de um prato futurista com vegetais"><div class="orbit"></div><div class="orbit two"></div><div class="food-plate"></div><div class="float-card card-one"><small>Produção inteligente</small><strong>Mais alimento, menos desperdício</strong><div class="mini">↗ Tecnologia a favor da vida</div></div><div class="float-card card-two"><small>Um planeta em foco</small><strong>Escolhas mais sustentáveis</strong><div class="mini">✳ Cultivar novas ideias</div></div></div>
+</div></section>
+<section class="intro"><div class="wrap intro-grid"><div><div class="kicker">01 — O cenário</div><h2>O que vai estar no nosso prato amanhã?</h2></div><div><p>Os alimentos do futuro não são apenas comidas estranhas ou cápsulas de ficção científica. São novas maneiras de cultivar, criar e distribuir comida, usando recursos com mais inteligência.</p><p>Com as mudanças climáticas, o crescimento populacional e a pressão sobre água e solo, pesquisadores e produtores estão explorando alternativas. Muitas já existem; outras ainda precisam de pesquisa, investimento e aprovação.</p><div class="stat-grid"><div class="stat"><strong>🌿</strong><span>Produção com menor impacto ambiental</span></div><div class="stat"><strong>🧪</strong><span>Ciência para criar novas opções</span></div><div class="stat"><strong>♻️</strong><span>Menos perdas e desperdício</span></div></div></div></div></section>
+<section id="ideias"><div class="wrap"><div class="section-top"><div><div class="kicker">02 — As inovações</div><h2>Conheça os protagonistas<br>da nova alimentação.</h2></div><p class="section-desc">Da fazenda ao laboratório, conheça tecnologias que podem mudar como cultivamos, produzimos e consumimos alimentos — com explicações claras sobre como funcionam, seus benefícios e seus limites.</p></div>
+<p class="innovation-intro">O futuro da alimentação não será uma única invenção. Ele deve combinar agricultura mais eficiente, novas fontes de nutrientes, ciência dos alimentos e inteligência artificial. Algumas soluções já são usadas; outras ainda estão em desenvolvimento e precisam provar que são seguras, acessíveis e sustentáveis.</p>
+<aside class="quote-panel"><div class="quote-mark">“</div><div><blockquote>O desafio para a agricultura global é inovar maneiras de fazer mais com menos.</blockquote><cite>— Jahmy Hindman, diretor de tecnologia da John Deere</cite></div></aside>
+<div class="cards">
+<article class="food-card"><div class="card-visual visual-green"><span class="visual-emoji">🥬</span></div><div class="card-body"><span class="pill">Cultivo urbano</span><h3>Fazendas indoor e agricultura vertical</h3><p>São fazendas dentro de edifícios ou estufas fechadas, com plantas em prateleiras empilhadas. Luz, temperatura, umidade e irrigação são controladas para criar condições de crescimento.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details"><strong>Por que importa:</strong> a água pode circular pelo sistema e ser reutilizada, reduzindo muito o consumo em comparação com alguns cultivos tradicionais. Em sistemas bem projetados, a economia pode chegar a cerca de 95%, mas varia conforme a cultura e a tecnologia. Como as plantas ocupam vários níveis, algumas culturas conseguem produzir de 10 a 20 vezes mais por área de chão utilizada. Muitas operações também reduzem ou evitam agroquímicos e podem colher com mais frequência. <strong>Desafio:</strong> iluminação e climatização consomem energia, e nem todas as plantas são economicamente adequadas para esse modelo.</div></div></article>
+<article class="food-card"><div class="card-visual visual-lab"><span class="visual-emoji">🧫</span></div><div class="card-body"><span class="pill">Biotecnologia</span><h3>Carne cultivada</h3><p>Pesquisadores cultivam células animais em condições controladas para produzir tecido comestível.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Em vez de criar e abater um animal inteiro, a técnica busca desenvolver células em biorreatores. Ainda enfrenta desafios de custo, escala, energia, textura e regulamentação.</div></div></article>
+<article class="food-card"><div class="card-visual visual-gold"><span class="visual-emoji">🫘</span></div><div class="card-body"><span class="pill">Proteína alternativa</span><h3>Proteínas de plantas</h3><p>Feijões, ervilhas, soja e outras plantas podem virar alimentos ricos em proteína e saborosos.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Ingredientes vegetais são combinados e processados para criar hambúrgueres, bebidas e outros produtos. Leguminosas tradicionais também são uma opção acessível e nutritiva, sem precisar imitar carne.</div></div></article>
+<article class="food-card"><div class="card-visual visual-gold"><span class="visual-emoji">🍄</span></div><div class="card-body"><span class="pill">Fermentação</span><h3>Alimentos feitos por microrganismos</h3><p>Fungos, leveduras e bactérias podem ajudar a produzir ingredientes e proteínas.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">A fermentação é antiga — pão, iogurte e queijo já dependem dela. Novas técnicas usam microrganismos selecionados para produzir ingredientes específicos com controle de qualidade rigoroso.</div></div></article>
+<article class="food-card"><div class="card-visual visual-green"><span class="visual-emoji">🪴</span></div><div class="card-body"><span class="pill">Agricultura de precisão</span><h3>Plantações inteligentes</h3><p>Sensores, drones e dados ajudam agricultores a entender o que cada área da lavoura precisa.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Dados sobre solo, umidade e clima podem orientar a irrigação e o uso de insumos. A tecnologia pode melhorar a eficiência, desde que seja acessível e adaptada à realidade local.</div></div></article>
+<article class="food-card"><div class="card-visual visual-lab"><span class="visual-emoji">🦗</span></div><div class="card-body"><span class="pill">Novas fontes</span><h3>Insetos comestíveis e algas</h3><p>Em algumas culturas, insetos já são consumidos; algas também podem fornecer nutrientes e ingredientes.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Essas fontes podem oferecer proteínas e outros nutrientes, mas exigem atenção à segurança, alergias, sabor, aceitação cultural e impactos da produção. Não serão a única resposta para o futuro.</div></div></article>
+<article class="food-card"><div class="card-visual visual-lab"><span class="visual-emoji">🧊</span></div><div class="card-body"><span class="pill">Novos processos</span><h3>Produção artificial de alimentos</h3><p>Alimentos ou ingredientes podem ser produzidos em laboratórios e instalações industriais, usando células, microrganismos ou processos controlados.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">O termo “produção artificial” reúne técnicas diferentes: carne cultivada a partir de células, proteínas feitas por fermentação e ingredientes desenvolvidos por processos industriais. Não significa necessariamente que o alimento seja menos nutritivo ou inseguro; é preciso avaliar cada produto, seus ingredientes, o processo de fabricação e a aprovação das autoridades sanitárias.</div></div></article>
+<article class="food-card"><div class="card-visual visual-gold"><span class="visual-emoji">🍝</span></div><div class="card-body"><span class="pill">Impressão de alimentos</span><h3>Alimentos impressos em 3D</h3><p>Máquinas depositam camadas de ingredientes com formatos e quantidades programados para montar alimentos.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">A impressora usa pastas comestíveis — como purês, massas ou misturas de proteínas — e deposita o material camada por camada. Isso pode permitir formatos personalizados, porções precisas e texturas adaptadas a necessidades específicas. A tecnologia ainda tem limites de velocidade, custo, variedade de ingredientes e acabamento; não transforma qualquer matéria em comida automaticamente.</div></div></article>
+<article class="food-card"><div class="card-visual visual-lab"><span class="visual-emoji">🤖</span></div><div class="card-body"><span class="pill">Inteligência artificial</span><h3>IA na produção de alimentos</h3><p>Softwares analisam imagens, sensores e dados para ajudar a decidir quando plantar, irrigar, colher e identificar problemas.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Câmeras e sensores podem detectar pragas, doenças ou falta de água; modelos de IA ajudam a prever o clima, estimar colheitas e reduzir desperdício na indústria. A IA também pode auxiliar pesquisadores a desenvolver receitas e ingredientes. Ela não substitui a experiência humana: depende de dados confiáveis, manutenção, investimento e supervisão para evitar erros.</div></div></article>
+<article class="food-card"><div class="card-visual visual-green"><span class="visual-emoji">💊</span></div><div class="card-body"><span class="pill">Nutrição do futuro</span><h3>Pílulas como comida de astronauta?</h3><p>Comprimidos e bebidas concentradas podem fornecer nutrientes, mas uma pílula não substitui facilmente uma refeição completa.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Em missões espaciais, alimentos precisam ser seguros, leves, duráveis e fáceis de armazenar. Suplementos podem complementar a dieta, mas o corpo precisa de energia, proteínas, gorduras, fibras, vitaminas, minerais e água em quantidades adequadas. Uma única pílula não comporta facilmente toda a energia e o volume de nutrientes de uma refeição. No futuro, alimentos compactos podem ser úteis em situações específicas, mas refeições variadas continuam importantes.</div></div></article>
+<article class="food-card"><div class="card-visual visual-gold"><span class="visual-emoji">🌾</span></div><div class="card-body"><span class="pill">Sementes resilientes</span><h3>Melhoramento genético das sementes</h3><p>Cientistas selecionam ou desenvolvem variedades capazes de enfrentar melhor calor, seca, salinidade e outras condições extremas.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">O melhoramento genético pode cruzar plantas com características desejáveis e selecionar as gerações mais resistentes. Técnicas modernas também permitem estudar genes associados à tolerância ao calor, à falta de água e a doenças. O objetivo é proteger colheitas diante das mudanças climáticas, sem prometer resistência absoluta. Cada variedade precisa ser testada em diferentes ambientes e avaliada quanto à produtividade, qualidade nutricional e impactos ecológicos.</div></div></article>
+<article class="food-card"><div class="card-visual visual-lab"><span class="visual-emoji">🌱</span></div><div class="card-body"><span class="pill">Proteína alternativa</span><h3>Farinha de insetos</h3><p>Insetos próprios para consumo podem ser secos e moídos para produzir uma farinha rica em proteínas, usada em alguns alimentos.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Após criação controlada, os insetos são processados e transformados em pó, que pode ser incorporado a massas, barras e outros produtos. A composição varia conforme a espécie e o processamento. É essencial controlar higiene, origem e contaminação; pessoas com alergia a crustáceos ou ácaros podem reagir a certos insetos. A aceitação cultural e as regras locais também influenciam seu uso.</div></div></article>
+<article class="food-card"><div class="card-visual visual-green"><span class="visual-emoji">🌊</span></div><div class="card-body"><span class="pill">Biodiversidade alimentar</span><h3>Algas e cogumelos</h3><p>Algas podem fornecer fibras, minerais e proteínas; cogumelos oferecem sabor, fibras e ingredientes úteis para novas receitas.</p><button class="learn" aria-expanded="false">Como funciona <span class="arrow">→</span></button><div class="details">Algas são cultivadas em água doce ou no mar, dependendo da espécie, e podem virar ingredientes, espessantes ou alimentos. Cogumelos e micélio — a rede de filamentos dos fungos — podem ser usados em pratos e em produtos alternativos à carne. O valor nutricional varia muito entre espécies e produtos; cultivo responsável, identificação correta, controle de contaminantes e informação sobre nutrientes são fundamentais.</div></div></article>
+</div></div></section>
+<div class="wrap"><div class="innovation-note"><strong>Importante:</strong> números de economia de água e ganhos de produtividade são estimativas que variam conforme a cultura, o local e o sistema usado. Compare sempre o mesmo tipo de produção e considere também energia, custos, transporte e desperdício antes de concluir que uma tecnologia é mais sustentável.</div></div>
+<section class="future-band" id="como-funciona"><div class="wrap future-grid"><div><div class="eyebrow"><span class="dot"></span> 03 — Da ideia ao prato</div><h2>A tecnologia é parte da resposta. Não a resposta inteira.</h2><p>Uma inovação alimentar só faz sentido se for segura, nutritiva, acessível e boa para as pessoas e para o ambiente. O caminho envolve pesquisa, testes, produção responsável e escolhas conscientes.</p><a class="btn btn-primary" href="#impacto">Ver os benefícios possíveis ↗</a></div><div class="future-steps"><div class="step"><div class="step-num">01</div><div><h3>Pesquisar e testar</h3><p>Cientistas estudam ingredientes, nutrição, segurança e formas de produzir em escala.</p></div></div><div class="step"><div class="step-num">02</div><div><h3>Produzir com responsabilidade</h3><p>É preciso avaliar água, energia, solo, embalagem, transporte e desperdício.</p></div></div><div class="step"><div class="step-num">03</div><div><h3>Garantir acesso e confiança</h3><p>Regras sanitárias, informação clara e preços justos ajudam a tecnologia a beneficiar mais pessoas.</p></div></div></div></div></section>
+<section id="impacto"><div class="wrap"><div class="section-top"><div><div class="kicker">04 — O que pode mudar</div><h2>Um futuro melhor precisa<br>de escolhas equilibradas.</h2></div><p class="section-desc">As novas tecnologias oferecem oportunidades, mas seus resultados dependem de como são desenvolvidas, usadas e distribuídas.</p></div><div class="impact-grid"><article class="impact"><div class="impact-icon">💧</div><h3>Uso inteligente da água</h3><p>Sistemas precisos podem reduzir perdas e direcionar água para onde ela é necessária.</p></article><article class="impact"><div class="impact-icon">🌎</div><h3>Menor pressão ambiental</h3><p>Algumas alternativas podem reduzir a necessidade de terra e certos impactos da produção.</p></article><article class="impact"><div class="impact-icon">🥗</div><h3>Nutrição diversificada</h3><p>Mais opções podem complementar dietas variadas — sem substituir a importância de comer bem.</p></article><article class="impact"><div class="impact-icon">🤝</div><h3>Acesso para todos</h3><p>Preço, cultura, infraestrutura e distribuição são essenciais para não deixar ninguém para trás.</p></article></div></div></section>
+<section class="quiz" id="quiz"><div class="wrap quiz-box"><div><div class="kicker">05 — Aprenda explorando</div><h2>Você está pronto para o cardápio do futuro?</h2><p class="quiz-copy">Teste o que aprendeu. Escolha a resposta que melhor explica como podemos alimentar o mundo de forma mais sustentável.</p></div><div class="quiz-panel"><h3>Qual afirmação sobre os alimentos do futuro é a mais correta?</h3><label class="choice"><input type="radio" name="answer" value="a"> A tecnologia vai resolver todos os problemas sozinha.</label><label class="choice"><input type="radio" name="answer" value="b"> Precisamos combinar ciência, segurança, sustentabilidade e acesso.</label><label class="choice"><input type="radio" name="answer" value="c"> No futuro, as pessoas só vão comer pílulas.</label><button class="btn btn-primary quiz-submit" id="check-answer">Conferir resposta ↗</button><div class="quiz-result" id="quiz-result" role="status" aria-live="polite"></div></div></div></section>
+</main>
+<section class="history-section" id="historia"><div class="wrap"><div class="kicker">06 — Como chegamos até aqui</div><h2>Uma história de inovação na alimentação</h2><p class="history-intro">Os alimentos do futuro não surgiram do nada. A história da alimentação é marcada por pessoas que observaram a natureza, experimentaram técnicas e desenvolveram ferramentas para produzir, conservar e compartilhar comida. As tecnologias atuais continuam essa trajetória, combinando conhecimentos tradicionais com ciência moderna.</p><div class="history-grid"><article class="history-item"><strong>Há milhares de anos — agricultura e domesticação</strong><p>Grupos humanos passaram gradualmente da coleta e da caça para o cultivo de plantas e a criação de animais. A domesticação de espécies permitiu formar comunidades mais estáveis, guardar sementes e desenvolver diferentes culturas alimentares. Esse processo ocorreu em várias regiões do mundo, em épocas distintas, e transformou a relação entre sociedade e ambiente.</p></article><article class="history-item"><strong>Antiguidade até hoje — fermentação e conservação</strong><p>Fermentar alimentos para produzir pão, iogurte, queijo e bebidas é uma prática antiga, criada muito antes de as pessoas conhecerem os microrganismos. Secagem, salga, defumação e armazenamento também ajudaram a conservar colheitas. Hoje, a ciência explica melhor esses processos e usa microrganismos selecionados para desenvolver ingredientes com características específicas.</p></article><article class="history-item"><strong>Séculos XVIII e XIX — mecanização e ciência</strong><p>Novas máquinas agrícolas, transportes e métodos científicos mudaram a escala da produção e da distribuição. Ao mesmo tempo, estudos sobre nutrição, higiene e conservação ajudaram a compreender melhor a qualidade dos alimentos. Essas mudanças aumentaram a oferta em muitos lugares, mas seus benefícios e custos foram distribuídos de maneira desigual.</p></article><article class="history-item"><strong>Século XX — produção em larga escala</strong><p>Tratores, fertilizantes, sistemas de irrigação, refrigeração e melhoramento de sementes elevaram a produtividade em várias regiões. A chamada Revolução Verde contribuiu para aumentar colheitas de culturas importantes, mas também trouxe desafios, como dependência de insumos, pressão sobre a água e impactos sobre ecossistemas.</p></article><article class="history-item"><strong>Final do século XX e início do XXI — biotecnologia</strong><p>Avanços em genética, microbiologia e engenharia de processos abriram caminhos para estudar características das plantas, desenvolver novas variedades e produzir ingredientes por fermentação. Paralelamente, a agricultura de precisão começou a usar GPS, sensores e imagens para apoiar decisões no campo.</p></article><article class="history-item"><strong>Hoje e nas próximas décadas — sistemas conectados</strong><p>Inteligência artificial, robótica, agricultura vertical, impressão 3D de alimentos e carne cultivada ampliam as possibilidades. Algumas tecnologias já são usadas; outras ainda precisam reduzir custos, demonstrar benefícios ambientais e passar por avaliações de segurança. O futuro provavelmente combinará essas inovações com práticas agrícolas tradicionais e alimentos conhecidos.</p></article></div><p class="history-intro">A principal lição histórica é que nenhuma tecnologia resolve tudo sozinha. Para avaliar uma inovação, é importante perguntar quem terá acesso a ela, quais recursos consome, como afeta trabalhadores e comunidades e se realmente melhora a nutrição e a sustentabilidade.</p></div></section>
+<footer><div class="wrap footer-inner"><div class="footer-brand">✳ Futuro no Prato</div><div>Informação para imaginar — e construir — uma alimentação melhor.</div><div>Projeto educativo • 2026</div></div></footer>
+</div>
+<script>
+document.querySelectorAll('.learn').forEach(button => {
+  button.addEventListener('click', () => {
+    const card = button.closest('.food-card');
+    const opened = card.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(opened));
+    button.firstChild.textContent = opened ? 'Mostrar menos ' : 'Como funciona ';
+  });
+});
+document.getElementById('check-answer').addEventListener('click', () => {
+  const selected = document.querySelector('input[name="answer"]:checked');
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  if (!selected) {
+    result.textContent = 'Escolha uma alternativa para conferir sua resposta.';
+  } else if (selected.value === 'b') {
+    result.textContent = 'Muito bem! A inovação tem potencial, mas precisa caminhar junto com segurança alimentar, nutrição, sustentabilidade, preço justo e acesso.';
+  } else {
+    result.textContent = 'Quase! A tecnologia pode ajudar bastante, mas não resolve tudo sozinha. As escolhas humanas, as políticas públicas e o acesso também fazem diferença.';
+  }
+});
+</script>
+</body>
+</html>
